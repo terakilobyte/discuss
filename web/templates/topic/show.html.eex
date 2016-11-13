@@ -1,0 +1,13 @@
+<h2>Show topic</h2>
+
+<ul>
+
+  <li>
+    <strong>Subject:</strong>
+    <%= @topic.subject %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: topic_path(@conn, :edit, @topic) %>
+<%= link "Back", to: topic_path(@conn, :index) %>
