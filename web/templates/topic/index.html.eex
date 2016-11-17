@@ -3,7 +3,7 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Subject</th>
+      <th>Title</th>
 
       <th></th>
     </tr>
@@ -11,7 +11,7 @@
   <tbody>
 <%= for topic <- @topics do %>
     <tr>
-      <td><%= topic.subject %></td>
+      <td><%= topic.title %></td>
 
       <td class="text-right">
         <%= link "Show", to: topic_path(@conn, :show, topic), class: "btn btn-default btn-xs" %>

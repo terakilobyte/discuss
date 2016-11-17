@@ -4,10 +4,11 @@
 
   <li>
     <strong>Subject:</strong>
-    <%= @topic.subject %>
+    <%= @topic.title %>
   </li>
 
 </ul>
 
 <%= link "Edit", to: topic_path(@conn, :edit, @topic) %>
+&nbsp;
 <%= link "Back", to: topic_path(@conn, :index) %>

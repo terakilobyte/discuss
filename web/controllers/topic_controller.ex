@@ -4,6 +4,7 @@ defmodule Discuss.TopicController do
   alias Discuss.Topic
 
   def index(conn, _params) do
+    IO.inspect conn.assigns
     topics = Repo.all(Topic)
     render(conn, "index.html", topics: topics)
   end
@@ -17,12 +18,14 @@ defmodule Discuss.TopicController do
     changeset = Topic.changeset(%Topic{}, topic_params)
 
     case Repo.insert(changeset) do
-      {:ok, _topic} ->
+      {:ok, topic} ->
         conn
         |> put_flash(:info, "Topic created successfully.")
-        |> redirect(to: topic_path(conn, :index))
+        |> render("show.html", topic: topic)
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> put_flash(:error, "There was a problem with your request")
+        |> render("new.html", changeset: changeset)
     end
   end
 

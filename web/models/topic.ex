@@ -2,7 +2,9 @@ defmodule Discuss.Topic do
   use Discuss.Web, :model
 
   schema "topics" do
-    field :subject, :string
+    field :title, :string
+
+    belongs_to :author, Discuss.User
 
     timestamps()
   end
@@ -12,7 +14,9 @@ defmodule Discuss.Topic do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:subject])
-    |> validate_required([:subject])
+    |> cast(params, [:title])
+    |> validate_required([:title])
+    |> validate_length(:title, min: 5)
+    |> validate_length(:title, max: 25)
   end
 end
