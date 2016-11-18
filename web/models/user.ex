@@ -7,6 +7,7 @@ defmodule Discuss.User do
     field :provider, :string, required: true
 
     has_many :topics, Discuss.Topic, on_delete: :delete_all
+    has_many :comments, Discuss.Comment, on_delete: :delete_all
 
     timestamps()
   end

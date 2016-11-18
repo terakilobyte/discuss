@@ -1,5 +1,9 @@
 /* This file is for your main application css. */
 
+body, html {
+  height: 100%;
+}
+
 .help-block {
   color: red;
   text-transform: capitalize;
@@ -10,4 +14,13 @@
 .form-group {
   position: relative;
   margin-bottom: 25px;
+}
+
+.no-decoration {
+  text-decoration: none !important;
+}
+
+.bottom {
+  position: absolute;
+  bottom: -50vh;
 }

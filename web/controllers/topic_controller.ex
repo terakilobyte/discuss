@@ -3,8 +3,8 @@ defmodule Discuss.TopicController do
 
   alias Discuss.Topic
 
-  plug Discuss.Plugs.EnsureAuth when action in [:edit, :update, :delete]
   plug Discuss.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
+  plug :ensure_owner when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
     topics = Repo.all(Topic)
@@ -22,13 +22,11 @@ defmodule Discuss.TopicController do
       |> build_assoc(:topics)
       |> Topic.changeset(topic)
 
-    IO.inspect changeset
-
     case Repo.insert(changeset) do
-      {:ok, topic} ->
+      {:ok, _topic} ->
         conn
         |> put_flash(:info, "Topic created successfully.")
-        |> render("show.html", topic: topic)
+        |> redirect(to: topic_path(conn, :index))
       {:error, changeset} ->
         conn
         |> put_flash(:error, "There was a problem with your request")
@@ -71,5 +69,16 @@ defmodule Discuss.TopicController do
     conn
     |> put_flash(:info, "Topic deleted successfully.")
     |> redirect(to: topic_path(conn, :index))
+  end
+
+  defp ensure_owner(conn, _params) do
+    if Repo.get!(Discuss.Topic, conn.params["id"]).user_id == conn.assigns.user.id do
+      conn
+    else
+      conn
+      |> put_flash(:error, "You are not authorized to perform this action")
+      |> redirect(to: topic_path(conn, :index))
+      |> halt()
+    end
   end
 end

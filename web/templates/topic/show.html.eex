@@ -1,12 +1,8 @@
-<h2>Show topic</h2>
-
 <ul>
-
   <li>
     <strong>Subject:</strong>
     <%= @topic.title %>
   </li>
-
 </ul>
 <%= if @conn.assigns.user && @conn.assigns.user.id == @topic.user_id do %>
 <%= link "Edit", to: topic_path(@conn, :edit, @topic) %>

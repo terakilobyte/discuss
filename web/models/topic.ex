@@ -5,11 +5,12 @@ defmodule Discuss.Topic do
     field :title, :string
 
     belongs_to :user, Discuss.User
+    has_many :comments, Discuss.Comment
 
     timestamps()
   end
 
-  @required_fields ~w(title, user)
+  @required_fields ~w(title)
   @optional_fields ~w()
 
   @doc """
