@@ -8,7 +8,8 @@
   </li>
 
 </ul>
-
+<%= if @conn.assigns.user && @conn.assigns.user.id == @topic.user_id do %>
 <%= link "Edit", to: topic_path(@conn, :edit, @topic) %>
 &nbsp;
+  <% end %>
 <%= link "Back", to: topic_path(@conn, :index) %>

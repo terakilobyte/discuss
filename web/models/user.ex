@@ -6,7 +6,7 @@ defmodule Discuss.User do
     field :token, :string, required: true
     field :provider, :string, required: true
 
-    has_many :posts, Discuss.Topic, on_delete: :delete_all
+    has_many :topics, Discuss.Topic, on_delete: :delete_all
 
     timestamps()
   end

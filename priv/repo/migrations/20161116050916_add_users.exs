@@ -11,7 +11,7 @@ defmodule Discuss.Repo.Migrations.AddUsers do
     end
 
     alter table(:topics) do
-      add :author_id, references(:users)
+      add :user_id, references(:users)
     end
   end
 end

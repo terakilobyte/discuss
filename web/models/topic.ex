@@ -4,10 +4,13 @@ defmodule Discuss.Topic do
   schema "topics" do
     field :title, :string
 
-    belongs_to :author, Discuss.User
+    belongs_to :user, Discuss.User
 
     timestamps()
   end
+
+  @required_fields ~w(title, user)
+  @optional_fields ~w()
 
   @doc """
   Builds a changeset based on the `struct` and `params`.
